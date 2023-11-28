@@ -17,3 +17,5 @@ Executes the following actions:
     - prepare the testnet config files for each node:
         - either run evmosd testnet init-files on each host and then start evmosd service as a system daemon
         - or use one of the nodes to bootstrap the evmos chain with script localnet-start; create and distributing node configs across the cluster and run each validator as an individual container in each ec2 host 
+
+https://github.com/MariosAronis/evmos-WIP/issues/4
