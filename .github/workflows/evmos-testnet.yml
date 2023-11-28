@@ -46,6 +46,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: "evmosd-${{ github.event.inputs.tag }}"
-          path: evmos-WIP/build/evmosd
+          path: /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd
 
 
