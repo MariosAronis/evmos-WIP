@@ -6,13 +6,14 @@ on:
       tag:
         description: 'Tag for the release'
         required: true
+      release:
+        description: 'Name of this release'
+        required: true        
 jobs: 
   release:
-    name: release:
+    name: release
     runs-on: ubuntu-latest
     steps:
-      runs-on: ubuntu-latest
-      steps:
       - name: Checkout Branch
         uses: actions/checkout@v4
       - name: Create Release
@@ -21,5 +22,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.inputs.tag }}
+          release_name: ${{ github.event.inputs.tag }}
           draft: false
           prerelease: false
