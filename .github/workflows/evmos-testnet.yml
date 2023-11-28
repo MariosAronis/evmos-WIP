@@ -25,3 +25,14 @@ jobs:
           release_name: ${{ github.event.inputs.tag }}
           draft: false
           prerelease: false
+  build_binaries:
+    name: build_binaries
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Tag
+        uses: actions/checkout@v4
+        with:
+          repository: MariosAronis/evmos-WIP
+          ref: ${{ github.event.inputs.tag }}
+          persist-credentials: false
+
