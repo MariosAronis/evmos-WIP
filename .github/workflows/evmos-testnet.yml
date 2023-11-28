@@ -8,18 +8,18 @@ on:
         required: true
 jobs: 
   release:
+    name: release:
     runs-on: ubuntu-latest
     steps:
-      release:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout Branch
-            uses: actions/checkout@v4
-          - name: Create Release
-            uses: actions/create-release@v1
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            with:
-              tag_name: ${{ github.event.inputs.tag }}
-              draft: false
-              prerelease: false
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v4
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          draft: false
+          prerelease: false
