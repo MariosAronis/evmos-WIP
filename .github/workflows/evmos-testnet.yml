@@ -35,4 +35,17 @@ jobs:
           repository: MariosAronis/evmos-WIP
           ref: ${{ github.event.inputs.tag }}
           persist-credentials: false
+      - name: Build evmosd
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+          check-latest: true
+      - run: |
+          make build
+      - name: Upload binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: "evmosd-${{ github.event.inputs.tag }}"
+          path: evmos/build/evmosd
+
 
