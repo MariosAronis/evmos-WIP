@@ -47,5 +47,13 @@ jobs:
         with:
           name: "evmosd-${{ github.event.inputs.tag }}"
           path: /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd
+      - name: Configure AWS short lived credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::044425962075:role/evmos-testnet-deploy-slc
+          role-duration-seconds: 900
+          aws-region: us-west-2
+      # - name : Upload binary to aws artifactory
+          
 
 
