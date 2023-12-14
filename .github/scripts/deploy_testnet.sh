@@ -23,6 +23,17 @@ get_instance_id2 () {
 
 # Discover Testnet Nodes
 get_instance_id
-get_instance_id2
+
+Instances=`get_instance_id2`
+
+Length=`echo $Instances | jq '. | length'
+echo $Length
+
+if [[ $Length -eq 0 ]] ; then
+  echo "No validator nodes available. Please scale the validators' cluster"
+  exit 1
+else
+  echo "Proceeding with deployment"
+  exit 0
 
 # Copy evmosd binary to testnet nodes
