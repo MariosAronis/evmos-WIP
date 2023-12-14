@@ -7,7 +7,7 @@ fetch_binary () {
       aws ssm send-command \
     --instance-ids $instance \
     --document-name "AWS-RunShellScript" \
-    --parameters "aws s3 cp://evmosd-binaries/$BINARY /home/ubuntu/go/bin"
+    --parameters command="aws s3 cp://evmosd-binaries/$BINARY /home/ubuntu/go/bin"
 }
 
 get_instance_id () {
@@ -29,9 +29,10 @@ if [[ $Length -eq 0 ]] ; then
   exit 1
 else
   echo "Proceeding with deployment"
-  for instance in `echo $Instances | jq -r ' .[] | .[]."InstanceId"'`;
+  for instance in `echo $Instances | jq -qr ' .[] | .[]."InstanceId"'`;
   do 
+    # Copy evmosd binary to testnet nodes
     fetch_binary
   done
 fi
-# Copy evmosd binary to testnet nodes
+
