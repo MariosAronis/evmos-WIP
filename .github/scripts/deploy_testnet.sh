@@ -26,7 +26,7 @@ get_instance_id
 
 Instances=`get_instance_id2`
 
-Length=`echo $Instances | jq '. | length'
+Length=`echo $Instances | jq '. | length'`
 echo $Length
 
 if [[ $Length -eq 0 ]] ; then
