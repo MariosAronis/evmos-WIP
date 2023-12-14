@@ -29,7 +29,7 @@ if [[ $Length -eq 0 ]] ; then
   exit 1
 else
   echo "Proceeding with deployment"
-  for instance in `echo $Instances | jq -qr ' .[] | .[]."InstanceId"'`;
+  for instance in `echo $Instances | jq -r ' .[] | .[]."InstanceId"'`;
   do 
     # Copy evmosd binary to testnet nodes
     fetch_binary
