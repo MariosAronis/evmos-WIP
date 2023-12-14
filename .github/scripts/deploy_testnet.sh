@@ -7,7 +7,7 @@ fetch_binary () {
       aws ssm send-command \
     --instance-ids $instance \
     --document-name "AWS-RunShellScript" \
-    --parameters command="aws s3 cp://evmosd-binaries/$BINARY /home/ubuntu/go/bin"
+    --parameters command="aws s3 cp://evmosd-binaries/$BINARY /home/ubuntu/go/bin/evmosd"
 }
 
 get_instance_id () {
