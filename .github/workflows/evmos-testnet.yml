@@ -28,6 +28,7 @@ jobs:
   build_binaries:
     name: build_binaries
     runs-on: ubuntu-latest
+    # Fetch an OpenID Connect (OIDC) token. This requires id-token: write. For more information, see "About security hardening with OpenID Connect"
     permissions:
       id-token: write
       contents: read
@@ -56,7 +57,9 @@ jobs:
           role-to-assume: arn:aws:iam::044425962075:role/evmos-testnet-deploy-slc
           role-duration-seconds: 900
           aws-region: us-west-2
-      # - name : Upload binary to aws artifactory
+      - name: Deploy release to testnet nodes
+        run: |
+            ./.github/scripts/deploy-testnet.sh
           
 
 
