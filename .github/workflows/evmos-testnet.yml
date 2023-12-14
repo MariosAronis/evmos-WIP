@@ -33,6 +33,9 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: INstall dependencies
+        run: |
+            apt install jq -y
       - name: Checkout Tag
         uses: actions/checkout@v4
         with:
