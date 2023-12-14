@@ -1,18 +1,16 @@
 #!/bin/bash
 
+BINARY=$1
 VALUE="evmos-validator"
 
-get_instance_id () {
-  InstanceIDs=`aws ec2 describe-instances \
-      --filters "Name=tag:Name,Values=$VALUE" \
-                "Name=instance-state-name,Values=running" \
-      --output json \
-      --query 'Reservations[*].Instances[*].{InstanceId:InstanceId}' \
-      | jq '.[]'`   
-  echo $InstanceIDs 
+fetch_binary () {
+      aws ssm send-command \
+    --instance-ids $instance \
+    --document-name "AWS-RunShellScript" \
+    --parameters "aws s3 cp://evmosd-binaries/$BINARY /home/ubuntu/go/bin"
 }
 
-get_instance_id2 () {
+get_instance_id () {
   InstanceIDs=`aws ec2 describe-instances \
       --filters "Name=tag:Name,Values=$VALUE" \
                 "Name=instance-state-name,Values=running" \
@@ -21,19 +19,19 @@ get_instance_id2 () {
   echo $InstanceIDs 
 }
 
-# Discover Testnet Nodes
-get_instance_id
-
-Instances=`get_instance_id2`
+# Discover Testnet Nodes - Abort if node count is zero
+Instances=`get_instance_id`
 
 Length=`echo $Instances | jq '. | length'`
-echo $Length
 
 if [[ $Length -eq 0 ]] ; then
   echo "No validator nodes available. Please scale the validators' cluster"
   exit 1
 else
   echo "Proceeding with deployment"
-  exit 0
+  for instance in `echo $Instances | jq -r ' .[] | .[]."InstanceId"'`;
+  do 
+    fetch_binary
+  done
 fi
 # Copy evmosd binary to testnet nodes

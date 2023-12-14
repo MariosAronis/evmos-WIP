@@ -33,9 +33,6 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - name: INstall dependencies
-        run: |
-            sudo apt install jq -y
       - name: Checkout Tag
         uses: actions/checkout@v4
         with:
@@ -45,7 +42,7 @@ jobs:
       - name: Build evmosd
         uses: actions/setup-go@v4
         with:
-          go-version: '1.20'
+          go-version: '1.21'
           check-latest: true
       - run: |
           make build
@@ -65,7 +62,7 @@ jobs:
             aws s3 cp /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd s3://evmosd-binaries/evmosd-${{ github.event.inputs.tag }}          
       - name: Deploy release to testnet nodes
         run: |
-            .github/scripts/deploy_testnet.sh
+            .github/scripts/deploy_testnet.sh evmosd-${{ github.event.inputs.tag }}
           
 
 
