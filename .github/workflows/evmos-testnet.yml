@@ -59,7 +59,7 @@ jobs:
           aws-region: us-west-2
       - name: Deploy release to testnet nodes
         run: |
-            echo `pwd`; echo `ls -altrh`
+            echo `pwd`; echo `ls -altrh .github/scripts`
           
 
 
