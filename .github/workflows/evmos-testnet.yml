@@ -62,7 +62,7 @@ jobs:
           aws-region: us-west-2
       - name: Upload binary to S3
         run: |
-            aws s3 cp /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd/evmosd s3://evmosd-binaries/evmosd-${{ github.event.inputs.tag }}          
+            aws s3 cp /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd s3://evmosd-binaries/evmosd-${{ github.event.inputs.tag }}          
       - name: Deploy release to testnet nodes
         run: |
             .github/scripts/deploy_testnet.sh
