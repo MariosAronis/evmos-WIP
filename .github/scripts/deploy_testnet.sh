@@ -35,5 +35,5 @@ if [[ $Length -eq 0 ]] ; then
 else
   echo "Proceeding with deployment"
   exit 0
-
+fi
 # Copy evmosd binary to testnet nodes
