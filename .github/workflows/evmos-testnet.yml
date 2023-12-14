@@ -60,6 +60,9 @@ jobs:
           role-to-assume: arn:aws:iam::044425962075:role/evmos-testnet-deploy-slc
           role-duration-seconds: 900
           aws-region: us-west-2
+      - name: Debug
+        run: |
+            echo `ls -altrh /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd/`
       - name: Upload binary to S3
         run: |
             aws s3 cp /home/runner/work/evmos-WIP/evmos-WIP/build/evmosd/evmosd-${{ github.event.inputs.tag }} s3://evmosd-binaries          
