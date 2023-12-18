@@ -46,6 +46,15 @@ jobs:
           check-latest: true
       - run: |
           make build
+      - name: debug
+        run: |
+            echo `go env GOPATH`
+      - name: EVMOSD BINARY
+        run: |
+            cp "evmosd-${{ github.event.inputs.tag }}" `go env GOPATH`/bin/evmosd
+      - name: debug
+        run: |
+            echo `evmosd version`
       - name: Upload binary
         uses: actions/upload-artifact@v3
         with:
