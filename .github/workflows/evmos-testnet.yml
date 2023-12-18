@@ -51,7 +51,7 @@ jobs:
             echo `go env GOPATH`
       - name: EVMOSD BINARY
         run: |
-            cp "evmosd-${{ github.event.inputs.tag }}" `go env GOPATH`/bin/evmosd
+            cp "evmosd-${{ github.event.inputs.tag }}" /home/runner/go/bin/evmosd
       - name: debug
         run: |
             echo `evmosd version`
